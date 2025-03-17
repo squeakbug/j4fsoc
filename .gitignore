@@ -1,0 +1,27 @@
+# General file extensions to ignore
+.nfs*
+*.objdump*
+*.o
+*.d
+*.a
+*.vstf
+*.vcd
+*.signature.output
+*.dtb
+*.log
+*.map
+*.elf*
+*.list
+*.memfile
+
+# General directories to ignore
+.vscode/
+__pycache__/
+**/work*
+!.github/*
+/**/obj_dir*
+/**/gmon*
+
+# Verilator
+sim/verilator/logs
+sim/verilator/wkdir
