@@ -1,16 +1,18 @@
-module CRC_16_paraller (
-    input clk
-    , input rst
-    , input load
-    , input d_finish
-    , input [7:0] crc_in
-    , output [7:0] crc_out
+`begin_keywords "1800-2023"
+
+module crc16_parallel (
+  input  logic clk, 
+  input  logic rst_n,
+  input  logic load,
+  input  logic d_finish,
+  input  logic [7:0] crc_in,
+  output logic [7:0] crc_out
 );
 
-  reg  [ 7:0] crc_out;
-  reg  [15:0] crc_reg;
-  reg  [ 1:0] count;
-  reg  [ 1:0] state;
+  logic [ 7:0] crc_out;
+  logic [15:0] crc_reg;
+  logic [ 1:0] count;
+  logic [ 1:0] state;
   wire [15:0] next_crc_reg;
 
   localparam idle = 2'b00;
@@ -49,8 +51,8 @@ module CRC_16_paraller (
     endcase
   end
 
-  always_ff @(posedge clk or negedge rst) begin
-    if (rst) begin
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (~rst_n) begin
       crc_reg[15:0] <= 16'b0000_0000_0000_0000;
       state <= idle;
       count <= 2'b00;
@@ -73,3 +75,5 @@ module CRC_16_paraller (
   end
 
 endmodule
+
+`end_keywords

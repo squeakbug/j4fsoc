@@ -1,42 +1,15 @@
-################################################################################
-##
-## Filename:	Makefile
-## {{{
-## Project:	j4fsoc -- demo for starfighter project
-##
-## Purpose:	This is a grand makefile for the entire project.  It will
-##		build the assembler, and a SystemVerilog testbench, and then
-##		even test the CPU via that test bench.
-##
-##	Targets include:
-##
-##		bench	Build the CPP test bench/debugger facility.
-##
-##		doc	Build the chip specification and the GPL
-##			license.  These should be distributed pre-built, but
-##			you are welcome to rebuild them if you would like.
-##
-##		rtl	Run Verilator on the RTL
-##
-##		test	Run the test bench on the assembler test file.
-##
-##
-## Creator:	squeakbug
-##
-################################################################################
-
 .PHONY: all
 
-all: rtl sw sim
+all: lint rtl sim
 
-MAKE := make	# Was `which make`
+MAKE := make
 SUBMAKE := $(MAKE) --no-print-directory -C
 
 .PHONY: lint
 ## {{{
 lint:
 	@echo "Linting source code";
-	+@$(SUBMAKE) rtl/
+	@verible-verilog-format --inplace rtl/**/*.sv rtl/*.sv
 ## }}}
 
 .PHONY: rtl

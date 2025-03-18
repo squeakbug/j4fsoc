@@ -1,6 +1,9 @@
-`begin_keywords "1800-2017"
+`begin_keywords "1800-2023"
 
-module core_regfile #(
+module core_regfile 
+  import config_pkg::*;
+
+#(
     parameter config_t CONF
 ) (
     input  logic                   clk,
@@ -21,8 +24,8 @@ module core_regfile #(
 
   always_ff @(posedge clk or negedge rst_n) begin
     if (~rst_n) begin
-      for (x = 0; x < 32; x = x + 1) begin
-        regs[x] = 1'b0;
+      for (int i = 0; i < 32; i = i + 1) begin
+        regs[i] = 32'b0;
       end
     end  // TODO: resolve potensial read/write races
     else if (we2) regs[a2] <= wd2;

@@ -1,7 +1,8 @@
-`begin_keywords "1800-2017"
+`begin_keywords "1800-2023"
 
 module core_alu
-  import opcodes::*;
+  import config_pkg::*;
+  import opcodes_pkg::*;
 
 #(
     parameter config_t CONF
@@ -13,12 +14,13 @@ module core_alu
     output logic    [CONF.XLEN - 1:0] alu_res
 );
   always_comb begin
-    unique case ('b1)
-      op[ALU_OP_ADD]:  alu_res = src_a + src_b;
-      op[ALU_OP_OR]:   alu_res = src_a | src_b;
-      op[ALU_OP_SRL]:  alu_res = src_a >> src_b[4:0];
-      op[ALU_OP_SLTU]: alu_res = (src_a < src_b) ? 1 : 0;
-      op[ALU_OP_SUB]:  alu_res = src_a - src_b;
+    unique case (alu_op)
+      ALU_OP_ADD:  alu_res = src_a + src_b;
+      ALU_OP_AND:  alu_res = src_a & src_b;
+      ALU_OP_OR:   alu_res = src_a | src_b;
+      ALU_OP_SRL:  alu_res = src_a >> src_b[4:0];
+      ALU_OP_SLTU: alu_res = (src_a < src_b) ? 1 : 0;
+      ALU_OP_SUB:  alu_res = src_a - src_b;
     endcase
   end
 

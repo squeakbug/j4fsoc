@@ -1,7 +1,8 @@
-`begin_keywords "1800-2017"
+`begin_keywords "1800-2023"
 
 module core_controller
-  import opcodes::*;
+  import config_pkg::*;
+  import opcodes_pkg::*;
 
 #(
     parameter config_t CONF
@@ -27,7 +28,7 @@ module core_controller
     reg_write   = 1'b0;
     alu_src     = 1'b0;
     wd_src      = 1'b0;
-    alu_control = ALU_OP_ADD;
+    alu_op = ALU_OP_ADD;
 
     unique case ({
       funct7, funct3, op
@@ -39,62 +40,68 @@ module core_controller
         wd_src = 1'b1;
       end
       {
-        FUNCT7_ANY, FUNCT3_BEQ, OP_BEQ
+        FUNCT7_ANY, FUNCT3_ADD, OP_B
       } : begin
         branch = 1'b1;
         cond_zero = 1'b1;
-        alu_control = ALU_OP_SUB;
+        alu_op = ALU_OP_SUB;
       end
       {
-        FUNCT7_ANY, FUNCT3_BNE, OP_BNE
+        FUNCT7_ANY, FUNCT3_BNE, OP_B
       } : begin
         branch = 1'b1;
-        alu_control = ALU_OP_SUB;
+        alu_op = ALU_OP_SUB;
       end
 
       {
-        FUNCT7_ANY, FUNCT3_ANY, OP_ADDI
+        FUNCT7_ANY, FUNCT3_ADD, OP_I
       } : begin
         reg_write = 1'b1;
         alu_src = 1'b1;
-        alu_control = ALU_OP_ADD;
+        alu_op = ALU_OP_ADD;
       end
       {
-        FUNCT7_ANY, FUNCT3_ANY, OP_ANDI
+        FUNCT7_ANY, FUNCT3_AND, OP_I
       } : begin
         reg_write = 1'b1;
         alu_src = 1'b1;
-        alu_control = ALU_OP_ADD;
+        alu_op = ALU_OP_AND;
       end
       {
-        FUNCT7_ADD, FUNCT3_ADD, OP_ADD
+        FUNCT7_ADD, FUNCT3_ADD, OP_R
       } : begin
         reg_write   = 1'b1;
-        alu_control = ALU_OP_ADD;
+        alu_op = ALU_OP_ADD;
       end
       {
-        FUNCT7_SUB, FUNCT3_SUB, OP_SUB
+        FUNCT7_ADD, FUNCT3_AND, OP_R
       } : begin
         reg_write   = 1'b1;
-        alu_control = ALU_OP_SUB;
+        alu_op = ALU_OP_AND;
       end
       {
-        FUNCT7_OR, FUNCT3_OR, OP_OR
+        FUNCT7_SUB, FUNCT3_ADD, OP_R
       } : begin
         reg_write   = 1'b1;
-        alu_control = ALU_OP_OR;
+        alu_op = ALU_OP_SUB;
       end
       {
-        FUNCT7_SRL, FUNCT3_SRL, OP_SRL
+        FUNCT7_ADD, FUNCT3_OR, OP_R
       } : begin
         reg_write   = 1'b1;
-        alu_control = ALU_OP_SRL;
+        alu_op = ALU_OP_OR;
       end
       {
-        FUNCT7_SLTU, FUNCT3_SLTU, OP_SLTU
+        FUNCT7_ADD, FUNCT3_SRL, OP_R
       } : begin
         reg_write   = 1'b1;
-        alu_control = ALU_OP_SLTU;
+        alu_op = ALU_OP_SRL;
+      end
+      {
+        FUNCT7_ADD, FUNCT3_SLTU, OP_R
+      } : begin
+        reg_write   = 1'b1;
+        alu_op = ALU_OP_SLTU;
       end
 
     endcase

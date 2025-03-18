@@ -1,16 +1,19 @@
-`begin_keywords "1800-2017"
+`begin_keywords "1800-2023"
 
-module core_brom #(
+module brom
+  import config_pkg::*;
+
+#(
     parameter config_t CONF
 ) (
-    input  [31:0] mem_addr,
-    output [31:0] mem_data
+    input  logic [CONF.XLEN - 1:0] mem_addr,
+    output logic [CONF.XLEN - 1:0] mem_data
 );
 
   localparam ROM_SIZE = 1024;
 
   logic [CONF.XLEN - 1:0] rom[ROM_SIZE - 1:0];
-  assign rd = rom[a];
+  assign mem_data = rom[mem_addr];
 
   initial begin
     $readmemh("program.hex", rom);
