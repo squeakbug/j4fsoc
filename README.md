@@ -20,7 +20,7 @@ The toolchain installation script installs the following tools:
 
 ## RISC-V cores
 
-### SystemVerilog/Verilog/VHDL/
+### SystemVerilog/Verilog/VHDL
 
 - [schoolRISC-V](https://github.com/zhelnio/schoolRISCV)
     - [schoolRISC-V + instruction cache](https://github.com/NickolayTernovoy/schoolRISCV_ICache)
@@ -40,7 +40,6 @@ The toolchain installation script installs the following tools:
 - [kianRiscV](https://github.com/splinedrive/kianRiscV)
 - [OpenC910 by XuanTie/Alibaba](https://github.com/XUANTIE-RV/openc910)
 - [VeeR EL2 Core by CHIPS Alliance](https://github.com/chipsalliance/Cores-VeeR-EL2)
-
 - [e203](https://github.com/riscv-mcu/e203_hbirdv2)
 - [darkriscv](https://github.com/darklife/darkriscv)
 

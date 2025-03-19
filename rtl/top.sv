@@ -22,11 +22,22 @@ module top
       PLIC_RANGE: 32'h0000_1000
   };
 
-  j4fsoc #(
+  // ROM
+  wire [CONF.XLEN - 1:0] mem_addr, mem_data;
+  brom #(
       .CONF
+  ) rom (
+      .mem_addr,
+      .mem_data
+  );
+
+  j4fsoc #(
+    .CONF
   ) soc (
-      .clk,
-      .rst_n
+    .clk,
+    .rst_n,
+    .mem_data,
+    .mem_addr
   );
 
 endmodule

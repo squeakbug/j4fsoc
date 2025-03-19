@@ -7,7 +7,10 @@ module j4fsoc
     parameter config_t CONF
 ) (
     input logic clk,
-    input logic rst_n
+    input logic rst_n,
+    // BROM
+    input logic [CONF.XLEN - 1:0] mem_data,
+    output logic [CONF.XLEN - 1:0] mem_addr
 );
 
   // Program counter
@@ -97,15 +100,6 @@ module j4fsoc
       .alu_op,
       .alu_zero,
       .alu_res
-  );
-
-  // ROM
-  wire [CONF.XLEN - 1:0] mem_addr, mem_data;
-  brom #(
-      .CONF
-  ) rom (
-      .mem_addr,
-      .mem_data
   );
 
 endmodule

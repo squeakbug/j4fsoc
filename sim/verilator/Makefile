@@ -10,7 +10,6 @@ VERILATOR_ROOT ?= $(shell bash -c 'verilator -V|grep VERILATOR_ROOT | tail -1 | 
 endif
 export	$(VERILATOR)
 VROOT   := $(VERILATOR_ROOT)
-VDEFS   := $(shell ./vversion.sh)
 VINCS	:= -I$(VROOT)/include -I$(VROOT)/include/vltstd
 INCS	:= -I$(RTLOBJD) -I$(RTLD) $(VINCS)
 VLSRCS	:= verilated.cpp verilated_vcd_c.cpp verilated_threads.cpp
@@ -25,7 +24,7 @@ all: top_tb
 
 $(OBJDIR)/%.o: %.cpp
 	$(mk-objdir)
-	$(CXX) $(CFLAGS) $(VDEFS) $(INCS) -c $< -o $@
+	$(CXX) $(CFLAGS) $(INCS) -c $< -o $@
 
 top_tb: $(OBJDIR)/top_tb.o $(RTLOBJD)/Vtop__ALL.a
 	$(CXX) $(CFLAGS) $(VDEFS) $(INCS) $^ $(VLIB) -lpthread -o $@
