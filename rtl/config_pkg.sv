@@ -1,4 +1,4 @@
-`begin_keywords "1800-2023"
+`begin_keywords "1800-2012"
 
 package config_pkg;
 

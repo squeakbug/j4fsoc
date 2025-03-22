@@ -22,8 +22,15 @@ rtl:
 .PHONY: sim
 sim: rtl
 ## {{{
-	@echo "Building Verilator simulator";
+	@echo "Building Verilator simulation";
 	+@$(SUBMAKE) sim/verilator
+## }}}
+
+.PHONY: sim
+sim: rtl
+## {{{
+	@echo "Building Icarus simulation";
+	+@$(SUBMAKE) sim/sv
 ## }}}
 
 .PHONY: clean

@@ -6,6 +6,7 @@ The toolchain installation script installs the following tools:
 - [RISC-V GNU Toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain): GCC and accompanying compiler tools
 - [elf2hex](https://github.com/sifive/elf2hex): executable file to hexadecimal converter
 - [QEMU](https://www.qemu.org/docs/master/system/target-riscv.html): emulator 1
+- [buildroot (optionally)](https://buildroot.org/): embedded linux distribution builder
 - [j4frv32emu](https://github.com/squeakbug/j4frv32emu): emulator 2
 - [Spike](https://github.com/riscv-software-src/riscv-isa-sim): functional RISC-V model
 - [Yosys](https://github.com/YosysHQ/yosys): framework for RTL synthesis tools
@@ -17,6 +18,9 @@ The toolchain installation script installs the following tools:
 - [OSU Skywater 130 cell library](https://foss-eda-tools.googlesource.com/skywater-pdk/libs/sky130_osu_sc_t12): standard cell library
 - [RISCOF](https://github.com/riscv-software-src/riscof.git): RISC-V compliance test framework
 - [j4fos](https://github.com/squeakbug/j4fos): rtos for debugging
+
+TODO: use [OpenLane](https://github.com/The-OpenROAD-Project/OpenLane) or [OpenLane2](https://github.com/efabless/openlane2) container instead of this tools bunch.
+TODO: add [Yocto](https://docs.yoctoproject.org/) instead of buildroot
 
 ## RISC-V cores
 
@@ -71,6 +75,7 @@ The toolchain installation script installs the following tools:
 ## Literature and other sources
 
 - [RISC-V System-On-Chip Design](https://shop.elsevier.com/books/risc-v-system-on-chip-design/harris/978-0-323-99498-9)
+- [Введение в функциональную верификацию RISC-V ядер](https://github.com/riscv-tests-intro/riscv-tests-intro)
 - [Путеводитель АПС](https://github.com/MPSU/APS)
 - [Edaplayground](https://www.edaplayground.com/)
 

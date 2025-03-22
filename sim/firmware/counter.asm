@@ -1,5 +1,5 @@
 .option norvc
-.section .text._entry
+.section .text
 .type _entry, @function
 .global _entry
 _entry:

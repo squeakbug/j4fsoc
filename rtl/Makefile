@@ -1,14 +1,3 @@
-################################################################################
-##
-## Filename:	Makefile
-## {{{
-## Project: j4fsoc -- demo for starfighter project
-##
-## Purpose:	This makefile builds a verilator simulation.
-##		It does not make the system within Vivado or Quartus.
-##
-################################################################################
-
 ifneq ($(words $(CURDIR)),1)
  $(error Unsupported: GNU Make cannot build in directories containing spaces, build elsewhere: '$(CURDIR)')
 endif
@@ -35,7 +24,7 @@ VERILATOR = $(VERILATOR_ROOT)/bin/verilator
 VERILATOR_COVERAGE = $(VERILATOR_ROOT)/bin/verilator_coverage
 endif
 
-VERILATOR_FLAGS = +1800-2023ext+
+VERILATOR_FLAGS = +1800-2012ext+
 # Generate C++ in executable form
 VERILATOR_FLAGS += -cc --exe
 # Generate makefile dependencies (not shown as complicates the Makefile)
