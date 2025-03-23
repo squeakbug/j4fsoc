@@ -60,7 +60,7 @@ typedef struct packed {logic [ 2: 0] funct3; logic [12:10] imm_12_10; logic [ 2:
 typedef struct packed {logic [ 2: 0] funct3; logic [12:10] off_12_10; logic [ 2: 0] rs1_  ; logic [ 6: 2] off_06_02;                     logic [1:0] opcode;} t_format_cb;
 typedef struct packed {logic [ 2: 0] funct3; logic [12: 2] target;                                                                       logic [1:0] opcode;} t_format_cj;
 
-typedef union packed {
+typedef union {
   t_format_cr  cr;
   t_format_ci  ci;
   t_format_css css;
@@ -89,7 +89,7 @@ typedef enum logic [3:0] {
   TYPE_16_Q
 } t_format_16_wdh;
 
-function logic signed [15:0] immediate_16 (t_format_16 i, t_format_16_sel sel, t_format_16_wdh wdh);
+function automatic logic signed [15:0] immediate_16 (t_format_16 i, t_format_16_sel sel, t_format_16_wdh wdh);
   logic [15:0] imm = '0;
   case (sel)
     TYPE_16_CI:

@@ -16,10 +16,10 @@ module j4fsoc
   // Program counter
   wire [CONF.XLEN - 1:0] pc;
   wire [CONF.XLEN - 1:0] pc_branch = pc + imm_b;
-  wire [CONF.XLEN - 1:0] pc_plus_xlen = pc + $clog2(CONF.XLEN);
-  wire [CONF.XLEN - 1:0] pc_next = pc_src ? pc_branch : pc_next;
+  wire [CONF.XLEN - 1:0] pc_plus_xlen = pc + $clog2(CONF.XLEN) - 1;
+  wire [CONF.XLEN - 1:0] pc_next = pc_src ? pc_branch : pc_plus_xlen;
   flopr #(
-      .WIDTH(CONF.XLEN - 1)
+      .WIDTH(CONF.XLEN)
   ) r_pc (
       .clk,
       .reset(~rst_n),
@@ -39,7 +39,7 @@ module j4fsoc
   wire funct7;
   wire op;
   core_decoder #(
-      .CONF
+      .CONF(CONF)
   ) decoder (
       .inst,
       .rd,
@@ -59,7 +59,7 @@ module j4fsoc
   wire [CONF.XLEN - 1:0] rd0, rd1;
   wire [CONF.XLEN - 1:0] wd2 = wd_src ? imm_u : alu_res;
   core_regfile #(
-      .CONF
+      .CONF(CONF)
   ) regfile (
       .clk,
       .rst_n,
@@ -73,9 +73,9 @@ module j4fsoc
   );
 
   // Control unit
-  wire pc_src, wd_src, alu_src, reg_write;
+  wire pc_src, wd_src, alu_src;
   core_controller #(
-      .CONF
+      .CONF(CONF)
   ) controller (
       .op,
       .funct3,
@@ -93,7 +93,7 @@ module j4fsoc
   wire [CONF.XLEN - 1:0] alu_res;
   wire alu_zero, alu_op;
   core_alu #(
-      .CONF
+      .CONF(CONF)
   ) alu (
       .src_a(rd1),
       .src_b,

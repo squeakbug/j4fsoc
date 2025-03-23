@@ -3,7 +3,8 @@
 package config_pkg;
 
   typedef struct packed {
-    int XLEN;
+    int          XLEN;
+    logic E_SUPPORTED;
 
     // Peripheral Addresses
     // Peripheral memory space extends from BASE to BASE+RANGE
