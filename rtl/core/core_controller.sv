@@ -1,4 +1,4 @@
-`begin_keywords "1800-2012"
+`begin_keywords "1800-2023"
 
 module core_controller
   import config_pkg::*;

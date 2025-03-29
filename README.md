@@ -20,5 +20,11 @@ The toolchain installation script installs the following tools:
 - [RISCOF](https://github.com/riscv-software-src/riscof.git): RISC-V compliance test framework
 - [j4fos](https://github.com/squeakbug/j4fos): rtos for debugging
 
-TODO: use [OpenLane](https://github.com/The-OpenROAD-Project/OpenLane) or [OpenLane2 (F)](https://github.com/efabless/openlane2) container instead of this tools bunch.
-TODO: add [Yocto](https://docs.yoctoproject.org/) instead of buildroot
+## Vivado considerations
+
+https://github.com/barbedo/vivado-git
+
+## TODO:
+
+- TODO: use [OpenLane](https://github.com/The-OpenROAD-Project/OpenLane) or [OpenLane2 (F)](https://github.com/efabless/openlane2) container instead of this tools bunch.
+- TODO: add [Yocto](https://docs.yoctoproject.org/) instead of buildroot

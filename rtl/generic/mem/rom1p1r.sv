@@ -1,6 +1,6 @@
 // Purpose: Single-ported ROM
 
-`begin_keywords "1800-2012"
+`begin_keywords "1800-2023"
 
 module rom1p1r
   import config_pkg::*;

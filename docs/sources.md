@@ -34,6 +34,8 @@
 - [VeeR EL2 Core by CHIPS Alliance and Western Digital](https://github.com/chipsalliance/Cores-VeeR-EL2)
 - [e203](https://github.com/riscv-mcu/e203_hbirdv2)
 - [darkriscv](https://github.com/darklife/darkriscv)
+- [Bonfire](https://bonfirecpu.eu/)
+- [RSD](https://github.com/rsd-devel/rsd)
 
 ### Chisel/SpinalHDL/XLS/Migen/Amaranth/Silice/...
 
@@ -42,7 +44,6 @@
 - [VexRiscv](https://github.com/SpinalHDL/VexRiscv)
 - [SaxonSoc](https://github.com/SpinalHDL/SaxonSoc)
 - [ChiselV by carlosedp](https://github.com/carlosedp/chiselv)
-
 - [Discussion about XLS integration with Renode for SoCs simulation](https://github.com/google/xls/issues/997)
 - [Antmicro's XLS overview](https://antmicro.com/blog/2023/09/accelerating-digital-block-design-with-googles-xls/)
 
@@ -75,6 +76,13 @@
 - [Введение в функциональную верификацию RISC-V ядер](https://github.com/riscv-tests-intro/riscv-tests-intro)
 - [Путеводитель АПС](https://github.com/MPSU/APS)
 - [Edaplayground](https://www.edaplayground.com/)
+- [RISC-V External Debug Support](https://riscv.org/wp-content/uploads/2024/12/riscv-debug-release.pdf)
+
+### Common components 
+
+https://fpgacpu.ca/fpga/index.html
+https://github.com/bespoke-silicon-group/basejump_stl
+https://github.com/openhwgroup/cvw
 
 ### FPU
 

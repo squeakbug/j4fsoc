@@ -1,4 +1,4 @@
-`begin_keywords "1800-2012"
+`begin_keywords "1800-2023"
 
 module j4fsoc
   import config_pkg::*;
@@ -8,6 +8,15 @@ module j4fsoc
 ) (
     input logic clk,
     input logic rst_n,
+
+    // IRQ
+    input logic irq_ext_i,    // External interrupt request
+    input logic irq_soft_i,   // Software generated interrupt request
+    input logic irq_mtimer_i, // Machine timer interrupt request
+
+    // Memory-mapped external timer
+    input logic [63:0] core_mtimer_val_i, // Machine timer value
+
     // BROM
     input logic [CONF.XLEN - 1:0] mem_data,
     output logic [CONF.XLEN - 1:0] mem_addr

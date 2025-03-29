@@ -1,0 +1,9 @@
+[submodule "deps/coremark"]
+	path = deps/coremark
+	url = https://github.com/eembc/coremark
+[submodule "deps/riscv-arch-test"]
+	path = deps/riscv-arch-test
+	url = https://github.com/riscv-non-isa/riscv-arch-test
+[submodule "deps/riscv-tests"]
+	path = deps/riscv-tests
+	url = https://github.com/riscv-software-src/riscv-tests

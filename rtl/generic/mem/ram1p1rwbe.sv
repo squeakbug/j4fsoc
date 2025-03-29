@@ -3,8 +3,8 @@
 //          When clk rises Addr and LineWriteData are sampled.
 //          Following the clk edge read data is output from the sampled Addr.
 
-module ram1p1rwbe 
-    import cvw::*; 
+module ram1p1rwbe
+  import cvw::*; 
     
   #(parameter USE_SRAM=0, DEPTH=64, WIDTH=44, PRELOAD_ENABLED=0) (
     input logic                     clk,
