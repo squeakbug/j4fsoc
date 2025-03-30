@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module systolic_array #(
     parameter DATA_WIDTH = 32, // Разрядность шины входных данных
     parameter ARRAY_W = 10,    // Количество строк в массиве
@@ -21,12 +23,12 @@ module systolic_array #(
     wire [2*DATA_WIDTH-1:0] temp_output_data [0:ARRAY_W_L-1][0 :ARRAY_W_W-1];
     wire   [DATA_WIDTH-1:0] propagate_module [0:ARRAY_W_L-1][0 :ARRAY_W_W-1];
     wire [2*DATA_WIDTH-1:0] prop_data;
-    wire [2*DATA_WIDTH-1:0] input_data;
+    wire [2*DATA_WIDTH-1:0] pe_input_data;
 
     genvar i, j;
     for (i = 0; i < ARRAY_W_L; i++) begin
         for (j = 0; j < ARRAY_W_W; j++) begin
-            assign input_data = (i == 0) 
+            assign pe_input_data = (i == 0) 
                 ? input_data[j] 
                 : propagate_module[i-1][j];
             assign prop_data = (j == 0) 
@@ -39,7 +41,7 @@ module systolic_array #(
                 .clk,
                 .rst_n,
                 .weight_load(weights_load),
-                .input_data,
+                .input_data(pe_input_data),
                 .prop_data,
                 .weights(weight_data[j][i]),
                 .out_data(temp_output_data[i][j]),

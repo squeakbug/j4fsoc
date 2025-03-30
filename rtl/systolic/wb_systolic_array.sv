@@ -1,8 +1,10 @@
 `begin_keywords "1800-2023"
 
-module wb_systolic_array #(
-    parameter ADDR_WIDTH = 32,
-    parameter DATA_WIDTH = 32
+module wb_systolic_array
+    import systolic_config_pkg::*;
+
+#(
+    parameter systolic_config_t CONF
 ) (
     wb_intf.slave wb
 );
@@ -58,10 +60,7 @@ module wb_systolic_array #(
     logic [31:0] mem_dout;
     
     // Memory instance
-    ram1p1rwbe #(
-        .DATA_WIDTH(32),
-        .ADDR_WIDTH(15)
-    ) ram (
+    ram1p1rwbe ram (
         .clk(clk),
         .ce(mem_ce),
         .addr(mem_addr),
@@ -73,11 +72,11 @@ module wb_systolic_array #(
     
     // Array interface
     logic weights_load;
-    logic input_data;
-    logic weight_data;
-    logic output_data;
-    
-    array arr (
+    logic [CONF.DATA_WIDTH-1:0] input_data [0:CONF.ARRAY_A_L-1];
+    logic [CONF.DATA_WIDTH-1:0] weight_data [0:CONF.ARRAY_W_W-1][0:CONF.ARRAY_W_L-1];
+    logic [2*CONF.DATA_WIDTH-1:0] output_data [0:CONF.ARRAY_W_L-1];
+
+    systolic_array arr (
         .clk(clk),
         .rst_n(rst_n),
         .weights_load(weights_load),

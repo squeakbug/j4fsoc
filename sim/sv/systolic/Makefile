@@ -27,8 +27,6 @@ VERILATOR_FLAGS += --assert
 VERILATOR_FLAGS += --coverage
 # Run Verilator in debug mode
 # VERILATOR_FLAGS += --debug
-# Make binary
-VERILATOR_FLAGS += --binary
 # Add this trace to get a backtrace in gdb
 #VERILATOR_FLAGS += --gdbbt
 # Handle `wait` statements
@@ -36,18 +34,23 @@ VERILATOR_FLAGS += --timing
 # Set top module
 VERILATOR_FLAGS += --top-module testbench
 
+# OR lint
+VERILATOR_FLAGS += --lint-only
 # Enable output from preprocessor
 # VERILATOR_FLAGS += --E
-# Run make to compile model, with as many CPUs as are free
-VERILATOR_FLAGS += --build -j
+# Should produce binary file
+# VERILATOR_FLAGS += --binary
+# OR build
+# VERILATOR_FLAGS += --binary --build -j
 
 SOURCES = \
 	../../../rtl/wishbone/wb_intf.sv \
-	../../../rtl/wishbone/wb_arbiter.sv \
-	../../../rtl/wishbone/wb_arbiter_2.sv \
+	../../../rtl/systolic/systolic_config_pkg.sv \
 	../../../rtl/systolic/systolic_array.sv \
 	../../../rtl/systolic/systolic_pe.sv \
 	../../../rtl/systolic/wb_systolic_array.sv \
+	../../../rtl/generic/mem/ram1p1rwbe.sv \
+	../../../rtl/generic/flop/flopen.sv \
 	../wishbone/wb_pkg.sv \
 	../wishbone/wb_packet_base.sv \
 	../wishbone/wb_cfg_base.sv \
@@ -71,7 +74,10 @@ INCLUDE_DIRS = \
 	-I../wishbone \
 	-I../../../rtl/systolic \
 
-all: compile run view
+all: lint compile run view
+
+lint:
+	$(VERILATOR) $(VERILATOR_FLAGS) --lint-only -Wall $(INCLUDE_DIRS) $(SOURCES)
 
 compile:
 	$(VERILATOR) $(VERILATOR_FLAGS) $(INCLUDE_DIRS) $(SOURCES)

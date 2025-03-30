@@ -2,7 +2,7 @@ class systolic_test_base;
 
     // Interfaces
 
-    virtual wb_intf  wb_vif;
+    virtual wb_intf  _wb_vif;
 
     // Main configuration
 
@@ -22,7 +22,7 @@ class systolic_test_base;
         virtual wb_intf  wb_vif
     );
         // Получение интерфейсов
-        this.wb_vif  = wb_vif;
+        this._wb_vif  = wb_vif;
         // Создание
         cfg           = new();
         env           = new();
@@ -41,8 +41,8 @@ class systolic_test_base;
         env.wb_env.master.master_monitor.mbx     = wb_mon2scb;
         env.wb_env.check.mbx                     = wb_mon2scb;
         // Проброс интерфейса
-        env.wb_env.master.master_driver.vif      = this.wb_vif;
-        env.wb_env.master.master_monitor.vif     = this.wb_vif;
+        env.wb_env.master.master_driver.vif      = this._wb_vif;
+        env.wb_env.master.master_monitor.vif     = this._wb_vif;
     endfunction
 
     virtual task run();

@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module systolic_pe
 #(
   parameter DATA_WIDTH = 8

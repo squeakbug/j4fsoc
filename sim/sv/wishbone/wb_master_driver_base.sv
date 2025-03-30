@@ -21,7 +21,7 @@ class wb_master_driver_base;
     virtual task run();
         wb_packet_base p;
         reset_master();
-        wait(vif.rst_n);
+        wait(vif.rst_i);
         forever begin
             fork
                 forever begin
@@ -30,10 +30,10 @@ class wb_master_driver_base;
                     trans_cnt += 1;
                 end
             join_none
-            wait(~vif.rst_n);
+            wait(~vif.rst_i);
             disable fork;
             reset_master();
-            wait(vif.rst_n);
+            wait(vif.rst_i);
         end
     endtask
 
@@ -49,17 +49,14 @@ class wb_master_driver_base;
                 [cfg.master_delay_min:cfg.master_delay_max]
             };
         });
-        repeat(delay) @(posedge vif.clk);
+        repeat(delay) @(posedge vif.clk_i);
         // Transition start
         vif.adr     <= p.adr;
         vif.dat_o   <= p.dat_o;
         vif.we      <= p.we;
-        vif.sel     <= p.sel;
-        vif.stb     <= p.stb;
-        vif.cyc     <= p.cyc;
         vif.tagn_o  <= p.tagn_o;
         do begin
-            @(posedge vif.clk);
+            @(posedge vif.clk_i);
         end
         while( vif.ack );
         // Transition acknowledged

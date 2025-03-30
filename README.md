@@ -24,7 +24,12 @@ The toolchain installation script installs the following tools:
 
 https://github.com/barbedo/vivado-git
 
+## Why u should use Questa or XSim for verification
+
+* [std::randomized are not supported](https://github.com/verilator/verilator/issues/5438)
+
 ## TODO:
 
 - TODO: use [OpenLane](https://github.com/The-OpenROAD-Project/OpenLane) or [OpenLane2 (F)](https://github.com/efabless/openlane2) container instead of this tools bunch.
 - TODO: add [Yocto](https://docs.yoctoproject.org/) instead of buildroot
+- TODO: use [UVM](https://www.chipverify.com/tutorials/uvm) built-in classes

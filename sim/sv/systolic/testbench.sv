@@ -8,6 +8,7 @@ module testbench;
     //---------------------------------
 
     import systolic_pkg::*;
+    import systolic_config_pkg::*;
 
 
     //---------------------------------
@@ -29,7 +30,18 @@ module testbench;
     // Модуль для тестирования
     //---------------------------------
 
-    wb_systolic_array DUT(wb_if);
+    localparam systolic_config_t CONF = '{
+        ADDR_WIDTH: 32,
+        DATA_WIDTH: 32,
+        ARRAY_W:    10,
+        ARRAY_L:    10,
+        ARRAY_W_W:   4,
+        ARRAY_W_L:   4,
+        ARRAY_A_W:   4,
+        ARRAY_A_L:   4
+    };
+
+    wb_systolic_array #(.CONF(CONF)) DUT(wb_if);
 
 
     //---------------------------------

@@ -15,6 +15,7 @@ class wb_packet_base;
         str = {str, $sformatf("dat_o: %1b\n", dat_o )};
         str = {str, $sformatf("dat_i: %8h\n", dat_i )};
         str = {str, $sformatf("sel  : %8h\n", sel )};
+        str = {str, $sformatf("tagn_o  : %8h\n", tagn_o )};
         str = {str, $sformatf("we   : %1b\n", we )};
         return str;
     endfunction

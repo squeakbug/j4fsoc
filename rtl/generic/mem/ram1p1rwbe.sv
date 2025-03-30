@@ -4,9 +4,8 @@
 //          Following the clk edge read data is output from the sampled Addr.
 
 module ram1p1rwbe
-  import cvw::*; 
     
-  #(parameter USE_SRAM=0, DEPTH=64, WIDTH=44, PRELOAD_ENABLED=0) (
+  #(parameter USE_SRAM=0, DEPTH=64, WIDTH=32, PRELOAD_ENABLED=0) (
     input logic                     clk,
     input logic                     ce,
     input logic [$clog2(DEPTH)-1:0] addr,
@@ -19,7 +18,8 @@ module ram1p1rwbe
   ///////////////////////////////////////////////////////////////////////////////
   // TRUE SRAM macro
   ///////////////////////////////////////////////////////////////////////////////
-  if ((USE_SRAM == 1) & (WIDTH == 128) & (DEPTH == 64)) begin // Cache data subarray
+
+  if ((USE_SRAM == 1) & (WIDTH == 128) & (DEPTH == 64)) begin: cache_data_subarray
     genvar index;
     // 64 x 128-bit SRAM
     logic [WIDTH-1:0] BitWriteMask;
@@ -28,8 +28,8 @@ module ram1p1rwbe
     ram1p1rwbe_64x128 sram1A (.CLK(clk), .CEB(~ce), .WEB(~we),
       .A(addr), .D(din), 
       .BWEB(~BitWriteMask), .Q(dout));
-    
-  end else if ((USE_SRAM == 1) & (WIDTH == 44)  & (DEPTH == 64)) begin // RV64 cache tag
+
+  end else if ((USE_SRAM == 1) & (WIDTH == 44)  & (DEPTH == 64)) begin: rv64_cache
     genvar index;
     // 64 x 44-bit SRAM
     logic [WIDTH-1:0] BitWriteMask;
@@ -39,7 +39,7 @@ module ram1p1rwbe
       .A(addr), .D(din), 
       .BWEB(~BitWriteMask), .Q(dout));
 
-  end else if ((USE_SRAM == 1) & (WIDTH == 22)  & (DEPTH == 64)) begin // RV32 cache tag
+  end else if ((USE_SRAM == 1) & (WIDTH == 22)  & (DEPTH == 64)) begin: rv32_cache
     genvar index;
     // 64 x 22-bit SRAM
     logic [WIDTH-1:0] BitWriteMask;
@@ -79,21 +79,12 @@ module ram1p1rwbe
     flopen #($clog2(DEPTH)) adrreg(clk, ce, addr, addrd);
     assign dout = RAM[addrd];
 
-    // Write divided into part for bytes and part for extra msbs
-    // Questa sim version 2022.3_2 does not allow multiple drivers for RAM when using always_ff.
-    // Therefore these always blocks use the older always @(posedge clk) 
-    if (WIDTH >= 8) begin
-      integer i;
-      always @(posedge clk) 
-        if (ce & we) 
-          for (i = 0; i < WIDTH/8; i++) 
-            if (bwe[i]) RAM[addr][i*8 +: 8] <= din[i*8 +: 8];
+    always @(posedge clk) begin
+      if (ce & we) 
+        for (integer i = 0; i < WIDTH / 8; i++) 
+          if (bwe[i]) RAM[addr][i*8 +: 8] <= din[i*8 +: 8];
     end
-  
-    if (WIDTH%8 != 0) // handle msbs if width not a multiple of 8
-      always @(posedge clk) 
-        if (ce & we & bwe[WIDTH/8])
-          RAM[addr][WIDTH-1:WIDTH-WIDTH%8] <= din[WIDTH-1:WIDTH-WIDTH%8];
+
   end
 
 endmodule
