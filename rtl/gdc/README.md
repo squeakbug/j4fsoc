@@ -15,5 +15,4 @@ https://bitsavers.org/pdf/digitalResearch/gsx/GSX-80_Graphics_Extension_Programm
 ### i82720
 
 http://bitsavers.informatik.uni-stuttgart.de/components/intel/_dataSheets/82720_Data_Sheet_Preliminary_Jun83.pdf
-http://www.bitsavers.org/components/intel/_dataSheets/82720_Data_Sheet_Preliminary_Jun83.pdf
 https://bitsavers.trailing-edge.com/components/intel/_dataBooks/1983_230685-001_82720_GDC_Application_Manual_Jul83.pdf

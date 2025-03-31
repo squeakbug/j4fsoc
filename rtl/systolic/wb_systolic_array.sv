@@ -9,22 +9,12 @@ module wb_systolic_array
     wb_intf.slave wb
 );
 
-    function automatic void reset_device();
-        for (int i = 0; i < 5; i++) begin
-            regs[i] <= 16'b0;
-        end
-        ack <= 1'b0;
-        read_data <= 32'b0;
-        
-        // Reset memory interface
-        mem_ce <= 1'b0;
-        mem_we <= 1'b0;
-        mem_bwe <= 4'b0;
-    endfunction
-
     // ========================
     // Wishbone interface
     // ========================
+    // Wishbone response
+    logic ack;
+    logic [31:0] read_data;
     wire clk = wb.clk_i;
     wire rst_n = ~wb.rst_i;
     
@@ -59,6 +49,19 @@ module wb_systolic_array
     logic [3:0] mem_bwe;    // Byte write enables
     logic [31:0] mem_dout;
     
+    function automatic void reset_device();
+        for (int i = 0; i < 5; i++) begin
+            regs[i] <= 16'b0;
+        end
+        ack <= 1'b0;
+        read_data <= 32'b0;
+        
+        // Reset memory interface
+        mem_ce <= 1'b0;
+        mem_we <= 1'b0;
+        mem_bwe <= 4'b0;
+    endfunction
+
     // Memory instance
     ram1p1rwbe ram (
         .clk(clk),
@@ -84,10 +87,6 @@ module wb_systolic_array
         .weight_data(weight_data),
         .output_data(output_data)
     );
-    
-    // Wishbone response
-    logic ack;
-    logic [31:0] read_data;
     
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
@@ -168,8 +167,8 @@ module wb_systolic_array
     assign wb.ack = ack;
     assign wb.tagn_o = 1'b0;  // No error signaling for now
     
-    assign weights_load = (regs[0][0] && (regs[1] <= mem_addr) && (mem_addr < (regs[1] + regs[2])));
-    assign input_data = (regs[0][0] && (regs[3] <= mem_addr) && (mem_addr < (regs[3] + regs[4])));
+    // assign weights_load = (regs[0][0] && (regs[1] <= mem_addr) && (mem_addr < (regs[1] + regs[2])));
+    // assign input_data = (regs[0][0] && (regs[3] <= mem_addr) && (mem_addr < (regs[3] + regs[4])));
 
 endmodule
 

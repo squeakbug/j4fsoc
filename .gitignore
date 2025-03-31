@@ -27,12 +27,10 @@ __pycache__/
 sim/verilator/logs
 sim/verilator/wkdir
 
-# Vivado IDE
-j4fsoc.cache/
-j4fsoc.gen/
-j4fsoc.hw/
-j4fsoc.ip_user_files/
-j4fsoc.runs/
-j4fsoc.sim/
-j4fsoc.srcs/
+# Vivado IDE and XSim
+xsim.dir/
+.Xil/
 sim/**/*.coe
+*.pb
+*.str
+*.jou

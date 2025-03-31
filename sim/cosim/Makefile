@@ -20,6 +20,13 @@ VLSRCS	:= verilated.cpp verilated_vcd_c.cpp verilated_threads.cpp
 VLOBJS := $(addprefix $(OBJDIR)/,$(subst .cpp,.o,$(VLSRCS)))
 VLIB   := $(addprefix $(VROOT)/include/,$(VLSRCS))
 
+.PHONY: top
+top: $(VOBJ)/Vtop__ALL.a
+$(VOBJ)/Vtop__ALL.a: $(VOBJ)/Vtop.cpp $(VOBJ)/Vtop.h
+	$(SUBMAKE) Vtop.mk
+$(VOBJ)/Vtop.cpp:
+	$(VERILATOR) --prefix Vtop -cc $(VERILATOR_INPUT) --top-module top
+
 all: top_tb
 
 $(OBJDIR)/%.o: %.cpp

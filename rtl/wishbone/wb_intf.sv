@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 `begin_keywords "1800-2023"
 
 interface wb_intf #(
