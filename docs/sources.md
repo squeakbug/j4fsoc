@@ -36,6 +36,7 @@
 - [darkriscv](https://github.com/darklife/darkriscv)
 - [Bonfire](https://bonfirecpu.eu/)
 - [RSD](https://github.com/rsd-devel/rsd)
+- [i3c-core by Antmicro](https://github.com/chipsalliance/i3c-core)
 
 ### Chisel/SpinalHDL/XLS/Migen/Amaranth/Silice/...
 

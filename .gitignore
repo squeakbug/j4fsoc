@@ -34,3 +34,6 @@ sim/**/*.coe
 *.pb
 *.str
 *.jou
+
+# SystemC
+build/

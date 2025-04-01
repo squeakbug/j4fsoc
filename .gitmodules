@@ -7,3 +7,6 @@
 [submodule "deps/riscv-tests"]
 	path = deps/riscv-tests
 	url = https://github.com/riscv-software-src/riscv-tests
+[submodule "deps/spdlog"]
+	path = deps/spdlog
+	url = https://github.com/gabime/spdlog
