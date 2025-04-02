@@ -1,5 +1,11 @@
 # j4fsoc
 
+## Setup dev environment
+
+```sh
+nix develop
+```
+
 ## Overview
 
 The toolchain installation script installs the following tools:
@@ -24,9 +30,10 @@ The toolchain installation script installs the following tools:
 
 https://github.com/barbedo/vivado-git
 
-## Why u should use Questa or XSim for verification
+## Verilator and scheduling considerations
 
-* [std::randomized are not supported](https://github.com/verilator/verilator/issues/5438)
+* [std::randomized are not supported in vanila version](https://github.com/verilator/verilator/issues/5438)
+* [Dynamic scheduler by Antmicro](https://opensource.antmicro.com/projects/verilator-dynamic-scheduler-examples/)
 
 ## TODO:
 
